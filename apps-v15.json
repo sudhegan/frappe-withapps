@@ -1,0 +1,42 @@
+[
+  {
+    "url": "https://github.com/frappe/erpnext.git",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/frappe/hrms.git",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/frappe/education.git",
+    "branch": "develop"
+  },
+  {
+    "url": "https://github.com/frappe/payments.git",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/frappe/non_profit.git",
+    "branch": "develop"
+  },
+  {
+    "url": "https://github.com/frappe/changemakers.git",
+    "branch": "develop"
+  },
+  {
+    "url": "https://github.com/frappe/print_designer.git",
+    "branch": "master"
+  },
+  {
+    "url": "https://github.com/frappe/builder.git",
+    "branch": "master"
+  },
+  {
+    "url": "https://github.com/frappe/webshop.git",
+    "branch": "version-15"
+  },
+  {
+    "url": "https://github.com/resilient-tech/india-compliance.git",
+    "branch": "version-15"
+  }
+]
