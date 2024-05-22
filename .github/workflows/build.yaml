@@ -35,17 +35,14 @@ jobs:
           repository: frappe/frappe_docker
           path: builds
 
-      - name: list files
-        run: ls builds/images/custom
-
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64/v8
           push: true
           context: builds
           file: builds/images/custom/Containerfile
-          tags: sudhegan/frappe-withapps:latest
+          tags: sudhegan/frappe-withapps:v15,sudhegan/frappe-withapps:latest
           build-args: |
             "FRAPPE_PATH=${{ env.FRAPPE_REPO }}"
             "FRAPPE_BRANCH=${{ env.FRAPPE_VERSION }}"
