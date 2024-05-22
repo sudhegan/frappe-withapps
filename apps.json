@@ -25,11 +25,11 @@
   },
   {
     "url": "https://github.com/frappe/print_designer.git",
-    "branch": "master"
+    "branch": "develop"
   },
   {
     "url": "https://github.com/frappe/builder.git",
-    "branch": "master"
+    "branch": "develop"
   },
   {
     "url": "https://github.com/frappe/webshop.git",
