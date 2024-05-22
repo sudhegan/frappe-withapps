@@ -30,7 +30,7 @@ jobs:
         id: source-build-env
         run: |
           cat ./build.env >> $GITHUB_ENV
-          echo "APPS_JSON_BASE64=$(base64 -w 0 ./apps.json)" >> $GITHUB_ENV
+        #echo "APPS_JSON_BASE64=$(base64 -w 0 ./apps.json)" >> $GITHUB_ENV
 
       ### Using Kaniko (https://github.com/GoogleContainerTools/kaniko)
       # - uses: int128/kaniko-action@v1
@@ -63,7 +63,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           context: builds
-          file: builds/${{ env.DOCKERFILE }}
+          file: builds/images/custom/Containerfile
           tags: sudhegan/frappe-withapps:latest
           ###ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:${{ inputs.version || env.VERSION }},ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:latest
           build-args: |
