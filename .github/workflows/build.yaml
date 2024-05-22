@@ -55,7 +55,7 @@ jobs:
           path: builds
 
       - name: list files
-        run: ls builds
+        run: ls /images/custom/
 
       - name: Build and push
         uses: docker/build-push-action@v5
