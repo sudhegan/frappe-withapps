@@ -5,39 +5,6 @@ on:
     branches:
       - build
 
-  workflow_dispatch:
-    inputs:
-      image:
-        description: Image name
-        type: string
-      version:
-        description: Image version tag
-        type: string
-      frappe-repo:
-        description: Frappe repo
-        type: string
-      frappe-version:
-        description: Frappe branch
-        type: string
-      py-version:
-        description: Python version
-        type: string
-      nodejs-version:
-        description: NodeJS version
-        type: string
-      apps-json-base64:
-        description: base64 encoded string of apps.json
-        type: string
-      context:
-        description: kaniko context
-        type: string
-      dockerfile:
-        description: dockerfile path from context
-        type: string
-      registry-user:
-        description: registry username
-        required: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -93,12 +60,12 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           context: builds
-          file: builds/${{ inputs.dockerfile || env.DOCKERFILE }}
+          file: builds/${{ env.DOCKERFILE }}
           tags: sudhegan/frappe-withapps:latest
           ###ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:${{ inputs.version || env.VERSION }},ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:latest
           build-args: |
-            "FRAPPE_PATH=${{ inputs.frappe-repo || env.FRAPPE_REPO }}"
-            "FRAPPE_BRANCH=${{ inputs.frappe-version || env.FRAPPE_VERSION }}"
-            "PYTHON_VERSION=${{ inputs.py-version || env.PY_VERSION }}"
-            "NODE_VERSION=${{ inputs.nodejs-version || env.NODEJS_VERSION }}"
-            "APPS_JSON_BASE64=${{ inputs.apps-json-base64 || env.APPS_JSON_BASE64 }}"
+            "FRAPPE_PATH=${{ env.FRAPPE_REPO }}"
+            "FRAPPE_BRANCH=${{ env.FRAPPE_VERSION }}"
+            "PYTHON_VERSION=${{ env.PY_VERSION }}"
+            "NODE_VERSION=${{ env.NODEJS_VERSION }}"
+            "APPS_JSON_BASE64=${{ env.APPS_JSON_BASE64 }}"
