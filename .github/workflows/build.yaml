@@ -38,11 +38,6 @@ on:
         description: registry username
         required: false
 
-    secrets:
-      REGISTRY_PASSWORD:
-        description: registry password
-        required: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -58,7 +53,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       ### Comment end - when not using docker build actions
 
-      - name: Login to Docker #GitHub Container Registry
+      - name: Login to Docker
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USER }}
@@ -68,7 +63,6 @@ jobs:
         id: source-build-env
         run: |
           cat ./build.env >> $GITHUB_ENV
-      ###echo "VERSION=$(cat ./ci/version.txt)" >> $GITHUB_ENV
           echo "APPS_JSON_BASE64=$(base64 -w 0 ./apps.json)" >> $GITHUB_ENV
 
       ### Using Kaniko (https://github.com/GoogleContainerTools/kaniko)
