@@ -13,25 +13,10 @@ jobs:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
-          root-reserve-mb:
-            description: 'Space to be left free on the root filesystem, in Megabytes.'
-            required: false
-            default: '1024'
-          temp-reserve-mb:
-            description: 'Space to be left free on the temp filesystem (/mnt), in Megabytes.'
-            required: false
-            default: '100'
           swap-size-mb:
             description: 'Swap space to create, in Megabytes.'
             required: false
             default: '4096'
-          overprovision-lvm:
-            description: |
-              Create the LVM disk images as sparse files, making the space required for the LVM image files *appear* unused on the
-              hosting volumes until actually allocated. Use with care, this can lead to surprising out-of-disk-space situations.
-              You should prefer adjusting root-reserve-mb/temp-reserve-mb over using this option.
-            required: false
-            default: 'false'
           build-mount-path:
             description: 'Absolute path to the mount point where the build space will be available, defaults to $GITHUB_WORKSPACE if unset.'
             required: false
