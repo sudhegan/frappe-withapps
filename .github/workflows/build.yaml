@@ -61,11 +61,8 @@ jobs:
       - name: Login to Docker #GitHub Container Registry
         uses: docker/login-action@v3
         with:
-          #registry: ${{ inputs.registry || env.REGISTRY }}
           username: ${{ secrets.DOCKER_USER }}
-          #${{ inputs.registry-user || github.actor }}
           password: ${{ secrets.DOCKER_TOKEN }}
-          #${{ secrets.REGISTRY_PASSWORD || secrets.GITHUB_TOKEN }}
 
       - name: Source Build Env
         id: source-build-env
