@@ -13,21 +13,6 @@ jobs:
       - name: Maximize build disk space
         uses: easimon/maximize-build-space@v10
         with:
-          swap-size-mb:
-            description: 'Swap space to create, in Megabytes.'
-            required: false
-            default: '4096'
-          build-mount-path:
-            description: 'Absolute path to the mount point where the build space will be available, defaults to $GITHUB_WORKSPACE if unset.'
-            required: false
-          pv-loop-path:
-            description: 'Absolute file path for the LVM image created on the root filesystem, the default is usually fine.'
-            required: false
-            default: '/pv.img'
-          tmp-pv-loop-path:
-            description: 'Absolute file path for the LVM image created on the temp filesystem, the default is usually fine. Must reside on /mnt'
-            required: false
-            default: '/mnt/tmp-pv.img'
           remove-dotnet:
             description: 'Removes .NET runtime and libraries.'
             required: false
