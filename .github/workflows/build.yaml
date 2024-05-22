@@ -12,13 +12,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      ### Comment start - when not using docker build actions
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      ### Comment end - when not using docker build actions
 
       - name: Login to Docker
         uses: docker/login-action@v3
@@ -30,25 +28,8 @@ jobs:
         id: source-build-env
         run: |
           cat ./build.env >> $GITHUB_ENV
-        #echo "APPS_JSON_BASE64=$(base64 -w 0 ./apps.json)" >> $GITHUB_ENV
+          echo "APPS_JSON_BASE64=$(base64 -w 0 ./apps.json)" >> $GITHUB_ENV
 
-      ### Using Kaniko (https://github.com/GoogleContainerTools/kaniko)
-      # - uses: int128/kaniko-action@v1
-      #   with:
-      #     push: true
-      #     cache: true
-      #     kaniko-args: |
-      #       --build-arg=FRAPPE_PATH=${{ inputs.frappe-repo || env.FRAPPE_REPO }}
-      #       --build-arg=FRAPPE_BRANCH=${{ inputs.frappe-version || env.FRAPPE_VERSION }}
-      #       --build-arg=PYTHON_VERSION=${{ inputs.py-version || env.PY_VERSION }}
-      #       --build-arg=NODE_VERSION=${{ inputs.nodejs-version || env.NODEJS_VERSION }}
-      #       --build-arg=APPS_JSON_BASE64=${{ inputs.apps-json-base64 || env.APPS_JSON_BASE64 }}
-      #       --context=${{ inputs.context || env.CONTEXT }}
-      #       --destination=ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:${{ inputs.version || env.VERSION }}
-      #       --destination=ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:latest
-      #     file: ${{ inputs.dockerfile || env.DOCKERFILE }}
-
-      ### Using docker build
       - uses: actions/checkout@v4
         with:
           repository: frappe/frappe_docker
@@ -65,7 +46,6 @@ jobs:
           context: builds
           file: builds/images/custom/Containerfile
           tags: sudhegan/frappe-withapps:latest
-          ###ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:${{ inputs.version || env.VERSION }},ghcr.io/${{ github.repository }}/${{ inputs.image || env.IMAGE }}:latest
           build-args: |
             "FRAPPE_PATH=${{ env.FRAPPE_REPO }}"
             "FRAPPE_BRANCH=${{ env.FRAPPE_VERSION }}"
