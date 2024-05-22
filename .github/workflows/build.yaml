@@ -54,6 +54,9 @@ jobs:
           repository: frappe/frappe_docker
           path: builds
 
+      - name: list files
+        run: ls builds
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
