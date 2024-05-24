@@ -45,7 +45,7 @@ jobs:
 
       - uses: actions/checkout@v4
         with:
-          repository: frappe/frappe_docker
+          repository: sudhegan/frappe_docker
           path: builds
 
       - name: Build and push
