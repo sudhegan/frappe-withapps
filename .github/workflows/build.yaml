@@ -39,7 +39,7 @@ jobs:
         run: |
           cat ./build.env >> $GITHUB_ENV
           echo "APPS_JSON_BASE64=$(base64 -w 0 ./apps.json)" >> $GITHUB_ENV
-          
+
       - name: Check disk space
         run: df -h
 
@@ -51,7 +51,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/arm64/v8
+          platforms: linux/arm64
           no-cache: true
           push: true
           context: builds
