@@ -39,7 +39,7 @@ jobs:
         run: |
           cat ./build.env >> $GITHUB_ENV
           echo "APPS_JSON_BASE64=$(base64 -w 0 ./apps.json)" >> $GITHUB_ENV
-          echo GITHUB_ENV
+          docker system prune --all -f
 
       - uses: actions/checkout@v4
         with:
@@ -50,10 +50,12 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           platforms: linux/arm64/v8
+          progress: plain
+          no-cache: true
           push: true
           context: builds
           file: builds/images/custom/Containerfile
-          tags: sudhegan/frappe-withapps:v15,sudhegan/frappe-withapps:latest
+          tags: ${{ secrets.DOCKER_USER }}/frappe-withapps:v15,${{ secrets.DOCKER_USER }}/frappe-withapps:latest
           build-args: |
             "FRAPPE_PATH=${{ env.FRAPPE_REPO }}"
             "FRAPPE_BRANCH=${{ env.FRAPPE_VERSION }}"
