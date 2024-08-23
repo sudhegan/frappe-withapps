@@ -13,6 +13,6 @@ This repo has code for building custom container image of frappe with follwing a
 7. Print Designer
 8. Builder
 9. Webshop
-10 India Compliance
+10. India Compliance
 
 
